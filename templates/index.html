@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+</head>
+<body>
+    <h1>Add Job</h1>
+    <form method="POST" action="/submit">
+        <label>Job Title</label>
+        <input type="text" name="title"><br><br>
+
+        <label>Company</label>
+        <input type="text" name="company"><br><br>
+
+        <label>Job Link</label>
+        <input type="url" name="link"><br><br>
+
+        <label>Date</label>
+        <input type="datetime" name="date"><br><br>
+
+        <input type="submit" name="submit">
+    </form>
+
+    <hr>
+    <h2>Saved Jobs</h2>
+
+    <ul>
+        {% for job in jobs %}
+        <li>
+            {{job[1]}} at {{job[2]}}
+            <a href="{{job[3]}}" target="_blank">Apply</a>
+            - {{job[4]}}
+        </li>
+        {% else %}
+        <li>no jobs saved yet</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
