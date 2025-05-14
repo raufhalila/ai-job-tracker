@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit this job</title>
+</head>
+<body>
+    <h1>Edit this Job</h1>
+        <form method="POST"">
+        <label>Job Title</label>
+        <input type="text" name="title" value="{{ job[1] }}"><br><br>
+
+        <label>Company</label>
+        <input type="text" name="company" value="{{ job[2] }}"><br><br>
+
+        <label>Job Link</label>
+        <input type="url" name="link" value="{{ job[3] }}"><br><br>
+
+        <label>Date</label>
+        <input type="datetime" name="date" value="{{ job[4] }}"><br><br>
+
+        <input type="submit" name="edit">
+        <a href="{{ url_for('index') }}"><button type="button">Cancel</button></a>
+    </form>
+</body>
+</html>
