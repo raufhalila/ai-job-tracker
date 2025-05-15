@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}View Jobs{% endblock %}
+
+{% block content %}
+<ul>
+    {% for job in jobs %}
+    <li>
+        {{job[1]}} at {{job[2]}}
+        <a href="{{job[3]}}" target="_blank">Apply</a>
+        - {{job[4]}}
+        <a href="delete/{{ job[0] }}" onclick="return confirm('Delete this Job?')">Delete</a>
+        - <a href="edit/{{ job[0] }}">Edit</a>
+    </li>
+    {% else %}
+    <li>no jobs saved yet</li>
+    {% endfor %}
+</ul>
+{% endblock %}

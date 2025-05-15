@@ -1,15 +1,53 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
+  background-color: #0d1117;
+  color: #e6edf3;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #0d1117;
+  color: #39ff14;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #1f242c;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links a {
+  color: #e6edf3;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  color: #00cc66;
+}
+
+.container {
+  padding: 30px;
 }
 
 form {
-  background-color: white;
+  background-color: #161b22;
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
   margin: 0 auto 30px auto;
+  box-shadow: 0 0 10px #39ff1470;
 }
 
 input[type="text"],
@@ -19,21 +57,24 @@ input[type="date"] {
   padding: 8px;
   margin-top: 5px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  background-color: #0d1117;
+  border: 1px solid #39ff14;
+  color: #e6edf3;
   border-radius: 4px;
 }
 
 input[type="submit"],
 button {
-  background-color: #9500cb;
-  color: white;
+  background-color: #39ff14;
+  color: #0d1117;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
 }
 
-a {
-  text-decoration: none;
-  margin-left: 10px;
+input[type="submit"]:hover,
+button:hover {
+  background-color: #00cc66;
 }

@@ -1,43 +1,22 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Job Tracker</title>
-</head>
-<body>
-    <h1>Add Job</h1>
-    <form method="POST" action="/submit">
-        <label>Job Title</label>
-        <input type="text" name="title"><br><br>
+{% extends "base.html" %}
 
-        <label>Company</label>
-        <input type="text" name="company"><br><br>
+{% block title %}Add Job{% endblock %}
 
-        <label>Job Link</label>
-        <input type="url" name="link"><br><br>
+{% block content %}
+<h1>Add Job</h1>
+<form method="POST" action="/submit">
+    <label>Job Title</label>
+    <input type="text" name="title"><br><br>
 
-        <label>Date</label>
-        <input type="datetime" name="date"><br><br>
+    <label>Company</label>
+    <input type="text" name="company"><br><br>
 
-        <input type="submit" name="submit">
-    </form>
+    <label>Job Link</label>
+    <input type="url" name="link"><br><br>
 
-    <hr>
-    <h2>Saved Jobs</h2>
+    <label>Date</label>
+    <input type="datetime" name="date"><br><br>
 
-    <ul>
-        {% for job in jobs %}
-        <li>
-            {{job[1]}} at {{job[2]}}
-            <a href="{{job[3]}}" target="_blank">Apply</a>
-            - {{job[4]}}
-            <a href="delete/{{ job[0] }}" onclick="return confirm('Delete this Job?')">Delete</a>
-            - <a href="edit/{{ job[0] }}">Edit</a>
-        </li>
-        {% else %}
-        <li>no jobs saved yet</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    <input type="submit" name="submit">
+</form>
+{% endblock %}

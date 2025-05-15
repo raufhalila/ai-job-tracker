@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>{% block title %}Job Tracker{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}"><div class="logo"><img src="/static/logoAJT.png" alt="AI JOB TRACKER"></div></a>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Add Job</a>
+            <a href="{{ url_for('jobs') }}">View Jobs</a>
+            <a href="#">AI Cover Letter</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
