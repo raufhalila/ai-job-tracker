@@ -12,7 +12,18 @@
 
 {% if letter %}
     <h3>Generated Cover Letter:</h3>
-    <pre class="cover-letter-box">{{ letter }}</pre>
+    <pre id="letter-box" class="cover-letter-box">{{ letter }}</pre>
+    <button onclick="copyToClipboard()">Copy</button>
+    <span id="copy-msg"></span>
 {% endif %}
-
+<script>
+    function copyToClipboard() {
+        const text = document.getElementById("letter-box").innerText;
+        navigator.clipboard.writeText(text);
+        document.getElementById("copy-msg").textContent = "Copied!";
+        setTimeout(() => {
+            document.getElementById("copy-msg").textContent = "";
+        }, 2000);
+    }
+</script>
 {% endblock %}
