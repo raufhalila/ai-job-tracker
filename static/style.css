@@ -78,3 +78,13 @@ input[type="submit"]:hover,
 button:hover {
   background-color: #00cc66;
 }
+
+.cover-letter-box {
+  background-color: #161b22;
+  padding: 15px;
+  border-radius: 6px;
+  color: #e6edf3;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
