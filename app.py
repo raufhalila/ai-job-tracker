@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
-import requests
+
+from ai import generate_cover_letter
+from db import get_all_jobs, get_job_by_id, insert_job, update_job, delete_job
 
 app = Flask(__name__)
 
@@ -10,14 +11,7 @@ def index():
 
 @app.route('/jobs')
 def jobs():
-    conn = sqlite3.connect('jobs.db')
-    c = conn.cursor()
-
-    c.execute("SELECT * FROM jobs")
-    jobs = c.fetchall()
-
-    conn.close()
-
+    jobs = get_all_jobs()
     return render_template("jobs.html", jobs=jobs)
 
 @app.route('/submit', methods=['POST'])
@@ -27,38 +21,16 @@ def submit():
     link = request.form['link']
     date = request.form['date']
 
-    print("you submitted a new job")
-    print("Title: ", title)
-    print("Company: ", company)
-    print("Link: ", link)
-    print("Date: ", date)
-
-    conn = sqlite3.connect('jobs.db')
-    c = conn.cursor()
-
-    c.execute("INSERT INTO jobs (title, company, link, date) VALUES (?, ?, ?, ?)", (title, company, link, date))
-
-    conn.commit()
-    conn.close()
-
-    return redirect(url_for('index'))
+    insert_job(title, company, link, date)
+    return redirect(url_for('jobs'))
 
 @app.route('/delete/<int:job_id>')
 def delete(job_id):
-    conn = sqlite3.connect('jobs.db')
-    c = conn.cursor()
-
-    c.execute("DELETE FROM jobs WHERE id = ?", (job_id,))
-
-    conn.commit()
-    conn.close()
-
+    delete_job(job_id)
     return redirect(url_for('index'))
 
 @app.route('/edit/<int:job_id>', methods=['POST', 'GET'])
 def edit(job_id):
-    conn = sqlite3.connect('jobs.db')
-    c = conn.cursor()
 
     if request.method == 'POST':
         title = request.form['title']
@@ -66,49 +38,23 @@ def edit(job_id):
         link = request.form['link']
         date = request.form['date']
 
-        c.execute("""
-            UPDATE jobs SET title = ?, company = ?, link = ?, date = ?
-            WHERE id = ?
-        """, (title, company, link, date, job_id))
+        update_job(job_id, title, company, link, date)
 
-        conn.commit()
-        conn.close()
-
-        return redirect(url_for('index'))
+        return redirect(url_for('jobs'))
     
     else:
-        c.execute("SELECT * FROM jobs WHERE id = ?", (job_id,))
-        job = c.fetchone()
-        conn.close()
+        job = get_job_by_id(job_id)
         return render_template('edit.html', job=job)
     
 @app.route('/cover-letter/<int:job_id>', methods=['POST', 'GET'])
 def cover_letter(job_id):
-    conn = sqlite3.connect('jobs.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM jobs WHERE id = ?", (job_id,))
-    job = c.fetchone()
-    conn.close()
+    job = get_job_by_id(job_id)
 
     letter = None
 
     if request.method == 'POST':
         
-        prompt = f"""
-        Write a short, enthusiastic and professional cover letter for a job application.
-        The position is '{job[1]}' at the company '{job[2]}'. Mention interest, value, and a strong closing line.
-        """
-
-        response = requests.post(
-            "http://localhost:11434/api/generate",
-            json={
-                "model": "mistral",
-                "prompt": prompt,
-                "stream": False
-            }
-        )
-
-        letter = response.json()["response"]
+        letter = generate_cover_letter(job[1], job[2])
 
     return render_template('cover_letter.html', job=job, letter=letter)
 
