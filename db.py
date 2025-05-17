@@ -39,3 +39,12 @@ def delete_job(job_id):
     c.execute("DELETE FROM jobs WHERE id = ?", (job_id,))
     conn.commit()
     conn.close()
+
+def search_jobs(query):
+    conn = sqlite3.connect('jobs.db')
+    c = conn.cursor()
+    wildcard = f"%{query}%"
+    c.execute("SELECT * FROM jobs WHERE title LIKE ? OR company LIKE ?", (wildcard, wildcard))
+    jobs = c.fetchall()
+    conn.close()
+    return jobs

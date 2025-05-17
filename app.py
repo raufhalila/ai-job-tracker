@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 from ai import generate_cover_letter
-from db import get_all_jobs, get_job_by_id, insert_job, update_job, delete_job
+from db import get_all_jobs, get_job_by_id, insert_job, update_job, delete_job, search_jobs
 
 app = Flask(__name__)
 
@@ -11,7 +11,12 @@ def index():
 
 @app.route('/jobs')
 def jobs():
-    jobs = get_all_jobs()
+    query = request.args.get('q')
+    if query:
+        jobs = search_jobs(query)
+    else:
+        jobs = get_all_jobs()
+
     return render_template("jobs.html", jobs=jobs)
 
 @app.route('/submit', methods=['POST'])
