@@ -58,5 +58,19 @@ def cover_letter(job_id):
 
     return render_template('cover_letter.html', job=job, letter=letter)
 
+@app.route('/instant-letter', methods=['POST', 'GET'])
+def instant_letter():
+    letter = None
+
+    if request.method == 'POST':
+        title = request.form['title']
+        company = request.form['company']
+        requirements = request.form['requirements']
+
+        from ai import generate_custom_letter
+        letter = generate_custom_letter(title, company, requirements)
+
+    return render_template('instant_letter.html', letter=letter)
+
 if __name__ == '__main__':
     app.run(debug=True)
