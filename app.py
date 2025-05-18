@@ -35,14 +35,22 @@ def login():
 
         if user and check_password_hash(user[1], passwordlogin):
             session['user_id'] = user[0]
+            session['username'] = usernamelogin
             return redirect(url_for('index'))
         else:
             print("Wrong user")
 
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
 @app.route('/jobs')
 def jobs():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
     query = request.args.get('q')
     if query:
         jobs = search_jobs(query)
