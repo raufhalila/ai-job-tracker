@@ -1,5 +1,20 @@
 import sqlite3
 
+def insert_user(username, password):
+    conn = sqlite3.connect('jobs.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+    conn.commit()
+    conn.close()
+
+def get_user(username):
+    conn = sqlite3.connect('jobs.db')
+    c = conn.cursor()
+    c.execute("SELECT id, password FROM users WHERE username = ?", (username,))
+    user = c.fetchone()
+    conn.close()
+    return user
+
 def get_all_jobs():
     conn = sqlite3.connect('jobs.db')
     c = conn.cursor()
