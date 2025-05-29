@@ -10,7 +10,8 @@ c.execute('''
           title TEXT NOT NULL,
           company TEXT NOT NULL,
           link TEXT,
-          date TEXT
+          date DATE,
+          FOREIGN KEY (user_id) REFERENCES users(id) 
           )
 ''')
 

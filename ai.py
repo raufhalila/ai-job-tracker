@@ -23,7 +23,7 @@ def generate_custom_letter(title, company, requirements):
 
     response = requests.post(
         "http://localhost:11434/api/generate",
-        json={"model": "mistral", "prompt": prompt, "stream": False}
+        json={"model": "phi3", "prompt": prompt, "stream": False}
     )
 
     return response.json()["response"]

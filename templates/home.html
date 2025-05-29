@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Home - Trackle{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+<div class="home-container">
+  <div class="circle top-right"></div>
+  <div class="circle bottom-left"></div>
+
+  <div class="center-box">
+    <h1 class="title">TRACKLE</h1>
+    <h3 class="slogan">Built by THA student to THA students <br> start tracking!</h3>
+    <a href="{{ url_for('register') }}">
+      <button class="join-button">JOIN US</button>
+    </a>
+  </div>
+</div>
+{% endblock %}

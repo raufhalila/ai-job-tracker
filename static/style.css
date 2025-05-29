@@ -1,105 +1,133 @@
+/* === GLOBAL === */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #0d1117;
-  color: #e6edf3;
   margin: 0;
   padding: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: #ffffff;
+  color: #222;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.navbar {
-  background-color: #0d1117;
-  color: #39ff14;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #1f242c;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo img {
-  height: 40px;
-}
-
-.nav-links a {
-  color: #e6edf3;
-  margin-left: 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav-links a:hover {
-  color: #00cc66;
-}
 
 .container {
-  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-form {
-  background-color: #161b22;
-  padding: 20px;
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: #e11d48;
+}
+
+.navbar span {
+  font-weight: 500;
+  color: #555;
+}
+
+/* === HEADERS === */
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 800;
+  color: #e11d48;
+}
+
+/* === BUTTONS === */
+button,
+input[type="submit"] {
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
   border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #444;
+}
+
+/* === FORMS === */
+form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
   max-width: 500px;
-  margin: 0 auto 30px auto;
-  box-shadow: 0 0 10px #39ff1470;
+  margin: 2rem auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 input[type="text"],
 input[type="url"],
-input[type="date"] {
+input[type="date"],
+input[type="password"] {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  background-color: #0d1117;
-  border: 1px solid #39ff14;
-  color: #e6edf3;
-  border-radius: 4px;
-}
-
-input[type="submit"],
-button {
-  background-color: #39ff14;
-  color: #0d1117;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-input[type="submit"]:hover,
-button:hover {
-  background-color: #00cc66;
-}
-
-.cover-letter-box {
-  background-color: #161b22;
-  padding: 15px;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  color: #e6edf3;
+  font-size: 1rem;
+}
+
+/* === HOMEPAGE DECORATION === */
+.circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.top-right {
+  top: -120px;
+  right: -120px;
+  background: radial-gradient(circle at center, #ec4899, #f43f5e);
+}
+
+.bottom-left {
+  bottom: -120px;
+  left: -120px;
+  background: radial-gradient(circle at center, #facc15, #f43f5e);
+}
+
+/* === COVER LETTER BOX === */
+.cover-letter-box {
+  background-color: #fff5f8;
+  padding: 20px;
+  border-left: 4px solid #f43f5e;
+  border-radius: 6px;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: auto;
-}
-
-h2 {
-  text-align: center;
-  padding-bottom: 10px;
-  color: #f8fff9;
-  font-size: 25px;
-  font-weight: bold;
-}
-h1 {
-  text-align: center;
-  padding-bottom: 10px;
-  color: #f8fff9;
-  font-size: 35px;
-  font-weight: bold;
+  margin-bottom: 2rem;
 }
